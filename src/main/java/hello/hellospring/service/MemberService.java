@@ -5,11 +5,12 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-
+@Transactional // jpa를 쓰는경우에 서비스에 달아줘야함.
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -39,7 +40,7 @@ public class MemberService {
         validateDuplicate(member);
 
 
-        memberRepository.sava(member);
+        memberRepository.save(member);
         return member.getId();
     }
 

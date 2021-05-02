@@ -26,7 +26,7 @@ class MemoryMemberRepositoryTest {
         Member member = new Member();
         member.setName("Spring");
 
-        repository.sava(member);
+        repository.save(member);
         Member result = repository.findById(member.getId()).get();
 
        // Assertions.assertEquals(member, result); // 기댓값, 비교값
@@ -39,12 +39,12 @@ class MemoryMemberRepositoryTest {
     {
         Member member1 = new Member();
         member1.setName("Spring1");
-        repository.sava(member1);
+        repository.save(member1);
 
         // 쉬프트 에프육육
        Member member2 = new Member();
         member2.setName("Spring2");
-        repository.sava(member2);
+        repository.save(member2);
 
         Member result = repository.findByName("Spring1").get();
         org.assertj.core.api.Assertions.assertThat(result).isEqualTo(member1);
@@ -56,11 +56,11 @@ class MemoryMemberRepositoryTest {
     {
         Member member1 = new Member();
         member1.setName("spring1");
-        repository.sava(member1);
+        repository.save(member1);
         // 쉬프트 에프육육
         Member member2 = new Member();
         member2.setName("Spring2");
-        repository.sava(member2);
+        repository.save(member2);
 
         List<Member> result = repository.findAll();
 
