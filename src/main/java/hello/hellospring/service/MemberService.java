@@ -18,6 +18,7 @@ public class MemberService {
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
+
     }
 
 
@@ -27,6 +28,7 @@ public class MemberService {
     // 조건1 같은 이름이 있으면 안된다.
     public Long join(Member member)
     {
+        long start = System.currentTimeMillis();
         // 컨트롤 알트 브이 꿀단축키 ! 옵셔널에 대해 공부하기.
         //권장하는 방법은아니다
        // Optional<Member> result = memberRepository.findByName(member.getName());
@@ -35,13 +37,17 @@ public class MemberService {
             throw new IllegalStateException("이미 존재");
         });
       */
-
-        // 권장하는 방법 따로 메소드로 뺀다 컨트롤 알트 엠
-        validateDuplicate(member);
-
-
-        memberRepository.save(member);
-        return member.getId();
+        try {
+            // 권장하는 방법 따로 메소드로 뺀다 컨트롤 알트 엠
+            validateDuplicate(member);
+            memberRepository.save(member);
+            return member.getId();
+        }
+        finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish-start;
+            System.out.println(timeMs);
+        }
     }
 
     private void validateDuplicate(Member member) {

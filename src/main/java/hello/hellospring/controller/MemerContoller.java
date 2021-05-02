@@ -21,6 +21,7 @@ public class MemerContoller {
     @Autowired // 이 부분까지는 해줘야함
     public MemerContoller(MemberService memberService) {
         this.memberService = memberService;
+        System.out.println(memberService.getClass()); // aop 가자클래스 확인해보기
     }
 
     @GetMapping("/members/new")
